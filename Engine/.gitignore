@@ -1,0 +1,7 @@
+/target/
+
+# eclipse files
+.project
+.classpath
+.settings
+/Run Engine Service.launch

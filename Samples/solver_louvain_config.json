@@ -1,0 +1,10 @@
+{
+  "algorithm": "Louvain",
+  "algorithmParams": {
+    "resolution": 1.0
+  },
+  "priorities": {
+    "identity-lifecycle": 1.0,
+    "semantic-proximity": 1.0
+  }
+}

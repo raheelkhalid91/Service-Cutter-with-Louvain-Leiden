@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - openjdk8
+sudo: false
+env:
+  - NODE_VERSION=8.11.2
+before_install:
+  - nvm install $NODE_VERSION
+  - npm install -g npm
+  - npm install -g bower grunt-cli
+install: npm install

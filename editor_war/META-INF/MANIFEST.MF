@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Implementation-Title: editor
+Implementation-Version: 0.0.1-SNAPSHOT
+Archiver-Version: Plexus Archiver
+Built-By: USER
+Start-Class: ch.hsr.servicestoolkit.editor.Application
+Implementation-Vendor-Id: ch.hsr.servicestoolkit.editor
+Spring-Boot-Version: 1.2.5.RELEASE
+Created-By: Apache Maven 3.9.9
+Build-Jdk: 1.8.0_472
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.springframework.boot.loader.WarLauncher
+
