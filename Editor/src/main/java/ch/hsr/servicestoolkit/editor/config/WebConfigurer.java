@@ -4,6 +4,7 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import ch.hsr.servicestoolkit.editor.web.filter.CachingHttpHeadersFilter;
+import ch.hsr.servicestoolkit.editor.web.filter.SinglePageAppFilter;
 import ch.hsr.servicestoolkit.editor.web.filter.StaticResourcesProductionFilter;
 import ch.hsr.servicestoolkit.editor.web.filter.gzip.GZipServletFilter;
 import org.slf4j.Logger;
@@ -53,6 +54,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         }
         if (env.acceptsProfiles(Constants.SPRING_PROFILE_DEVELOPMENT)) {
             initH2Console(servletContext);
+            initSinglePageAppFilter(servletContext, disps);
         }
         log.info("Web application fully configured");
     }
@@ -68,6 +70,18 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         // CloudFoundry issue, see https://github.com/cloudfoundry/gorouter/issues/64
         mappings.add("json", "text/html;charset=utf-8");
         container.setMimeMappings(mappings);
+    }
+
+    /**
+     * Initializes the Single Page App filter for development mode.
+     */
+    private void initSinglePageAppFilter(ServletContext servletContext,
+                                        EnumSet<DispatcherType> disps) {
+        log.debug("Registering Single Page App Filter");
+        FilterRegistration.Dynamic spaFilter = servletContext.addFilter("singlePageAppFilter",
+                new SinglePageAppFilter());
+        spaFilter.addMappingForUrlPatterns(disps, true, "/*");
+        spaFilter.setAsyncSupported(true);
     }
 
     /**

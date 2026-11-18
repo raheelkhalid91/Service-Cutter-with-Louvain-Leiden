@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ch.hsr.servicecutter.EngineServiceAppication;
+import ch.hsr.servicecutter.EngineServiceApplication;
 import ch.hsr.servicecutter.model.criteria.CouplingCriterion;
 import ch.hsr.servicecutter.model.criteria.CouplingCriterionCharacteristic;
 import ch.hsr.servicecutter.model.usersystem.CouplingInstance;
@@ -25,7 +25,7 @@ import ch.hsr.servicecutter.model.usersystem.Nanoentity;
 import ch.hsr.servicecutter.model.usersystem.UserSystem;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 public class CouplingInstanceRepositoryTest {
 
 	@Autowired

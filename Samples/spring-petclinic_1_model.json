@@ -1,0 +1,86 @@
+{
+  "name": "PetClinic",
+  "entities": [
+    {
+      "name": "Owner",
+      "nanoentities": [
+        "id",
+        "firstName",
+        "lastName",
+        "address",
+        "city",
+        "telephone"
+      ]
+    },
+    {
+      "name": "Pet",
+      "nanoentities": [
+        "id",
+        "name",
+        "birthDate",
+        "type",
+        "ownerId"
+      ]
+    },
+    {
+      "name": "PetType",
+      "nanoentities": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "Visit",
+      "nanoentities": [
+        "id",
+        "visitDate",
+        "description",
+        "petId",
+        "vetId"
+      ]
+    },
+    {
+      "name": "Vet",
+      "nanoentities": [
+        "id",
+        "firstName",
+        "lastName",
+        "specialties"
+      ]
+    },
+    {
+      "name": "Specialty",
+      "nanoentities": [
+        "id",
+        "name"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "origin": "Owner",
+      "destination": "Pet",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Pet",
+      "destination": "PetType",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Pet",
+      "destination": "Visit",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Visit",
+      "destination": "Vet",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Vet",
+      "destination": "Specialty",
+      "type": "AGGREGATION"
+    }
+  ]
+}

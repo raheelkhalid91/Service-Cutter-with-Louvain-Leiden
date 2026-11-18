@@ -1,0 +1,41 @@
+{
+  "aggregates": [],
+  "entities": [],
+  "useCases": [
+    {
+      "name": "CreatePost",
+      "nanoentitiesRead": ["User.id", "Tag.id", "Tag.name"],
+      "nanoentitiesWritten": ["Post.id", "Post.title", "Post.content", "Post.createdAt", "Post.updatedAt", "Post.status", "Post.authorId"]
+    },
+    {
+      "name": "EditPost",
+      "nanoentitiesRead": ["Post.id", "Post.title", "Post.content"],
+      "nanoentitiesWritten": ["Post.title", "Post.content", "Post.updatedAt"]
+    },
+    {
+      "name": "DeletePost",
+      "nanoentitiesRead": ["Post.id"],
+      "nanoentitiesWritten": ["Post.status"]
+    },
+    {
+      "name": "ViewPost",
+      "nanoentitiesRead": ["Post.id", "Post.title", "Post.content", "Post.createdAt", "Post.updatedAt", "Post.status", "Comment.id", "Comment.content", "Comment.createdAt", "Comment.author"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "AddComment",
+      "nanoentitiesRead": ["Post.id", "User.id"],
+      "nanoentitiesWritten": ["Comment.id", "Comment.content", "Comment.createdAt", "Comment.author", "Comment.postId"]
+    },
+    {
+      "name": "ManageUsers",
+      "nanoentitiesRead": ["User.id", "User.username", "User.email", "User.role", "User.status"],
+      "nanoentitiesWritten": ["User.username", "User.email", "User.role", "User.status"]
+    },
+    {
+      "name": "AssignTags",
+      "nanoentitiesRead": ["Post.id", "Tag.id", "Tag.name"],
+      "nanoentitiesWritten": []
+    }
+  ]
+}

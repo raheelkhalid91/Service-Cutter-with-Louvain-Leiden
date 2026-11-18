@@ -50,7 +50,8 @@ angular.module('editorApp')
         										  'leungDelta': $scope.leungDelta,
         										  'mclExpansionOperations': $scope.mclExpansionOperations,
         										  'mclPowerCoefficient': $scope.mclPowerCoefficient,
-        										  'cwNodeWeighting': $scope.cwNodeWeighting
+        										  'cwNodeWeighting': $scope.cwNodeWeighting,
+        										  'resolution': $scope.louvainResolution
         							},
         							'priorities': {},
         							'algorithm': $scope.algorithm
@@ -248,7 +249,7 @@ angular.module('editorApp')
         		XL : {value: 8, name: "XL"},
         		XXL : {value: 13, name: "XXL"}
         }
-        $scope.availableAlgorithms = ['Leung','Girvan-Newman','Chinese Whispers','Markov (MCL)','Louvain'];
+        $scope.availableAlgorithms = ['Leung','Girvan-Newman','Chinese Whispers','Markov (MCL)','Louvain','Leiden'];
 
         $scope.criteriaTypes = ["COHESIVENESS", "COMPATIBILITY", "CONSTRAINTS"];
 
@@ -285,6 +286,8 @@ angular.module('editorApp')
 		$scope.mclPowerCoefficient = 2;
 
 		$scope.cwNodeWeighting = 0;
+
+		$scope.louvainResolution = 1.0;
 
         $scope.availableModels = Model.all();
 

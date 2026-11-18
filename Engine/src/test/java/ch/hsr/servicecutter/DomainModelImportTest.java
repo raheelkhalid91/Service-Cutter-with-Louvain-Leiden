@@ -26,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 import ch.hsr.servicecutter.importer.api.EntityRelationDiagram;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 @IntegrationTest("server.port=0")
 @WebAppConfiguration
 public class DomainModelImportTest {

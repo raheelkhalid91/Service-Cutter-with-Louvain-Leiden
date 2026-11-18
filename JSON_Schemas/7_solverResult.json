@@ -20,6 +20,23 @@
                },
                "id":{
                   "type":"string"
+               },
+               "metrics":{
+                  "type":"object",
+                  "properties":{
+                     "cohesion":{
+                        "type":"number"
+                     },
+                     "coupling":{
+                        "type":"number"
+                     },
+                     "numberOfNanoentities":{
+                        "type":"integer"
+                     },
+                     "numberOfDependencies":{
+                        "type":"integer"
+                     }
+                  }
                }
             }
          }

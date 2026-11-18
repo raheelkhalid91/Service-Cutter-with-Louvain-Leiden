@@ -1,0 +1,120 @@
+{ 
+  "useCases": [
+    {
+      "name": "findAvailableParkingSpace",
+      "nanoentitiesRead": ["ParkingArea.id", "ParkingArea.name", "ParkingArea.capacity", "Parking.checkInTime", "Parking.checkOutTime"],
+      "nanoentitiesWritten": [],
+      "isLatencyCritical": "true"
+    },
+    {
+      "name": "checkInVehicle",
+      "nanoentitiesRead": ["User.id", "Vehicle.id", "Vehicle.plateNumber", "ParkingArea.id"],
+      "nanoentitiesWritten": ["Parking.id", "Parking.checkInTime"],
+      "isLatencyCritical": "true"
+    },
+    {
+      "name": "checkOutVehicle",
+      "nanoentitiesRead": ["Parking.id", "Parking.checkInTime", "User.id"],
+      "nanoentitiesWritten": ["Parking.checkOutTime"],
+      "isLatencyCritical": "true"
+    },
+    {
+      "name": "assignRoleToUser",
+      "nanoentitiesRead": ["User.id", "Role.id"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "manageParkingAreaCapacity",
+      "nanoentitiesRead": ["ParkingArea.id", "ParkingArea.capacity"],
+      "nanoentitiesWritten": ["ParkingArea.capacity"],
+      "isLatencyCritical": "false"
+    }
+  ],
+  "compatibilities": {
+    "availabilityCriticality": [
+      {
+        "characteristic": "Critical",
+        "nanoentities": [
+          "Parking.id",
+          "Parking.checkInTime",
+          "Parking.checkOutTime",
+          "ParkingArea.id",
+          "ParkingArea.capacity"
+        ]
+      },
+      {
+        "characteristic": "Low",
+        "nanoentities": [
+          "User.username",
+          "Role.name"
+        ]
+      }
+    ],
+    "securityCriticality": [
+      {
+        "characteristic": "Critical",
+        "nanoentities": [
+          "User.password",
+          "User.id",
+          "User.username",
+          "Role.id"
+        ]
+      },
+      {
+        "characteristic": "Public",
+        "nanoentities": [
+          "ParkingArea.name",
+          "Vehicle.plateNumber"
+        ]
+      }
+    ]
+  },
+  "aggregates": [
+    {
+      "name": "ParkingSessionAggregate",
+      "nanoentities": [
+        "Parking.id",
+        "Parking.checkInTime",
+        "Parking.checkOutTime"
+      ]
+    }
+  ],
+  "securityAccessGroups": [
+    {
+      "name": "adminAccess",
+      "nanoentities": [
+        "User.id",
+        "User.username",
+        "User.password",
+        "Role.id",
+        "Role.name",
+        "ParkingArea.id",
+        "ParkingArea.name",
+        "ParkingArea.capacity"
+      ]
+    },
+    {
+      "name": "userAccess",
+      "nanoentities": [
+        "Vehicle.id",
+        "Vehicle.plateNumber",
+        "Vehicle.type",
+        "Parking.id",
+        "Parking.checkInTime",
+        "Parking.checkOutTime"
+      ]
+    }
+  ],
+  "predefinedServices": [
+    {
+      "name": "UserManagementService",
+      "nanoentities": [
+        "User.id",
+        "User.username",
+        "User.password",
+        "Role.id",
+        "Role.name"
+      ]
+    }
+  ]
+}

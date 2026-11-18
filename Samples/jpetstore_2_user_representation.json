@@ -1,0 +1,71 @@
+{
+  "aggregates": [],
+  "entities": [],
+  "useCases": [
+    {
+      "name": "Register Account",
+      "nanoentitiesRead": [],
+      "nanoentitiesWritten": ["Account.accountId", "Account.username", "Account.password", "Account.email", "Profile.profileId", "Profile.languagePreference", "Profile.favouriteCategoryId", "Profile.listOption", "Profile.bannerOption"]
+    },
+    {
+      "name": "Login",
+      "nanoentitiesRead": ["Account.username", "Account.password"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "Update Account",
+      "nanoentitiesRead": ["Account.accountId"],
+      "nanoentitiesWritten": ["Account.username", "Account.password", "Account.email", "Profile.languagePreference", "Profile.favouriteCategoryId", "Profile.listOption", "Profile.bannerOption"]
+    },
+    {
+      "name": "Browse Categories",
+      "nanoentitiesRead": ["Category.categoryId", "Category.name", "Category.description"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "Browse Products",
+      "nanoentitiesRead": ["Category.categoryId", "Product.productId", "Product.categoryId", "Product.name", "Product.description"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "View Item",
+      "nanoentitiesRead": ["Product.productId", "Item.itemId", "Item.productId", "Item.listPrice", "Item.unitCost", "Item.status", "Item.attribute1", "Item.attribute2", "Item.attribute3", "Item.attribute4", "Item.attribute5", "Inventory.itemId", "Inventory.quantity"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "Search Product",
+      "nanoentitiesRead": ["Product.productId", "Product.name", "Product.description", "Item.itemId", "Item.productId", "Item.listPrice", "Item.status"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "Add Item to Cart",
+      "nanoentitiesRead": ["Item.itemId", "Item.listPrice"],
+      "nanoentitiesWritten": ["Cart.cartId", "Cart.userId", "Cart.itemId", "Cart.quantity"]
+    },
+    {
+      "name": "Update Cart",
+      "nanoentitiesRead": ["Cart.cartId", "Cart.itemId"],
+      "nanoentitiesWritten": ["Cart.quantity", "LineItem.orderId", "LineItem.lineNumber", "LineItem.itemId", "LineItem.quantity", "LineItem.unitPrice"]
+    },
+    {
+      "name": "Remove Item from Cart",
+      "nanoentitiesRead": ["Cart.cartId", "Cart.itemId"],
+      "nanoentitiesWritten": ["Cart.quantity"]
+    },
+    {
+      "name": "Checkout",
+      "nanoentitiesRead": ["Cart.cartId", "Cart.userId", "Cart.itemId", "Cart.quantity", "LineItem.itemId", "LineItem.quantity", "Inventory.itemId", "Inventory.quantity"],
+      "nanoentitiesWritten": ["Order.orderId", "Order.userId", "Order.orderDate", "Order.shipAddress1", "Order.shipAddress2", "Order.shipCity", "Order.shipState", "Order.shipZip", "Order.shipCountry", "Order.billAddress1", "Order.billAddress2", "Order.billCity", "Order.billState", "Order.billZip", "Order.billCountry", "Order.courier", "Order.totalPrice", "Order.billToFirstName", "Order.billToLastName", "Order.shipToFirstName", "Order.shipToLastName", "Order.creditCard", "Order.expiryDate", "Order.cardType", "Order.locale", "Inventory.quantity"]
+    },
+    {
+      "name": "View Order",
+      "nanoentitiesRead": ["Order.orderId", "Order.userId", "Order.orderDate", "Order.totalPrice", "LineItem.orderId", "LineItem.lineNumber", "LineItem.itemId", "LineItem.quantity", "LineItem.unitPrice"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "View Order History",
+      "nanoentitiesRead": ["Account.accountId", "Order.orderId", "Order.userId", "Order.orderDate", "Order.totalPrice"],
+      "nanoentitiesWritten": []
+    }
+  ]
+}

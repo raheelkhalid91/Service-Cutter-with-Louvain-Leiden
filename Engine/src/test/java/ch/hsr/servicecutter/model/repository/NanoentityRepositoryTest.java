@@ -11,14 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ch.hsr.servicecutter.EngineServiceAppication;
-import ch.hsr.servicecutter.model.repository.UserSystemRepository;
+import ch.hsr.servicecutter.EngineServiceApplication;
 import ch.hsr.servicecutter.model.usersystem.Nanoentity;
 import ch.hsr.servicecutter.model.usersystem.UserSystem;
-import ch.hsr.servicecutter.model.repository.NanoentityRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 public class NanoentityRepositoryTest {
 
 	private static final String NANOENTITY_2 = "nanoentity2";

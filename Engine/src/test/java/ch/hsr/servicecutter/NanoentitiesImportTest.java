@@ -24,7 +24,7 @@ import ch.hsr.servicecutter.importer.api.NanoentitiesImport;
 import ch.hsr.servicecutter.model.usersystem.UserSystem;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 @IntegrationTest("server.port=0")
 @WebAppConfiguration
 public class NanoentitiesImportTest {

@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.google.common.base.Objects;
 
+import ch.hsr.servicecutter.model.analyzer.ServiceMetrics;
+
 public class Service {
 
 	private List<String> nanoentities;
 	private char id;
+	private ServiceMetrics metrics;
 
 	public Service(final List<String> nanoentities, final char id) {
 		this.nanoentities = nanoentities;
@@ -24,6 +27,14 @@ public class Service {
 
 	public String getName() {
 		return "Service " + id;
+	}
+	
+	public ServiceMetrics getMetrics() {
+		return metrics;
+	}
+	
+	public void setMetrics(ServiceMetrics metrics) {
+		this.metrics = metrics;
 	}
 
 	@Override

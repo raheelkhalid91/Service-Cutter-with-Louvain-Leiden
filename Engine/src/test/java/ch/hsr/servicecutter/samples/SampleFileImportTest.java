@@ -29,7 +29,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import ch.hsr.servicecutter.EngineServiceAppication;
+import ch.hsr.servicecutter.EngineServiceApplication;
 import ch.hsr.servicecutter.IntegrationTestHelper;
 import ch.hsr.servicecutter.UrlHelper;
 import ch.hsr.servicecutter.importer.ImportResult;
@@ -40,7 +40,7 @@ import ch.hsr.servicecutter.model.solver.SolverResult;
 import ch.hsr.servicecutter.solver.SolverConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 @IntegrationTest("server.port=0")
 @WebAppConfiguration
 public class SampleFileImportTest {

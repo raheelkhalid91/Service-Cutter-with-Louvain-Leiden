@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ChineseWhispersSolver extends AbstractWatsetSolver {
 
-    private final NodeWeighting nodeWeighting;
+    private final NodeWeighting<String, DefaultWeightedEdge> nodeWeighting;
 
     public ChineseWhispersSolver(UserSystem userSystem, Map<EntityPair, Map<String, Score>> scores, SolverConfiguration config) {
         super(userSystem, scores);
@@ -34,7 +34,7 @@ public class ChineseWhispersSolver extends AbstractWatsetSolver {
      * <p>
      * https://github.com/nlpub/watset-java#chinese-whispers
      */
-    private NodeWeighting mapNodeWeightingConfig(int nodeWeighting) {
+    private NodeWeighting<String, DefaultWeightedEdge> mapNodeWeightingConfig(int nodeWeighting) {
         switch (nodeWeighting) {
             case 1:
                 return NodeWeighting.label();

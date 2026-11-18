@@ -13,6 +13,7 @@
     <modules>
         <module>Engine</module>
         <module>Editor</module>
+        <module>external/networkanalysis</module>
     </modules>
 
     <build>

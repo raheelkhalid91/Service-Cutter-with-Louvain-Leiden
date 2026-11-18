@@ -1,7 +1,7 @@
 FROM eclipse-temurin:8-jdk
 # Use a prebuilt WAR from the Editor module target directory.
 # This avoids building frontend assets inside the image (works around apt/npm issues).
-COPY target/editor-*.war /app/editor.war
+COPY target/editor-0.0.1-SNAPSHOT.war /app/editor.war
 
 EXPOSE 8080
 # Use shell form so environment variables like $ENGINE_PORT are expanded by the shell

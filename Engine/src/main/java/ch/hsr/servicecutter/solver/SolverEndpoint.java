@@ -44,7 +44,8 @@ public class SolverEndpoint {
 	public static final String MODE_CW = "Chinese Whispers";
 	public static final String MODE_MARKOV = "Markov (MCL)";
 	public static final String MODE_LOUVAIN = "Louvain";
-	public static final String[] MODES = new String[] { MODE_GIRVAN_NEWMAN, MODE_LEUNG, MODE_CW, MODE_MARKOV, MODE_LOUVAIN };
+	public static final String MODE_LEIDEN = "Leiden";
+	public static final String[] MODES = new String[] { MODE_GIRVAN_NEWMAN, MODE_LEUNG, MODE_CW, MODE_MARKOV, MODE_LOUVAIN, MODE_LEIDEN }; 
 
 	@Autowired
 	public SolverEndpoint(final UserSystemRepository userSystemRepository, final Scorer scorer, final ServiceCutAnalyzer analyzer) {
@@ -82,6 +83,8 @@ public class SolverEndpoint {
 			solver = new ChineseWhispersSolver(userSystem, scores, config);
 		} else if (MODE_MARKOV.equals(algorithm)) {
 			solver = new MarkovSolver(userSystem, scores, config);
+		} else if (MODE_LEIDEN.equals(algorithm)) {
+			solver = new LeidenClusteringSolver(userSystem, scores, config);
 		} else if (MODE_LOUVAIN.equals(algorithm)) {
 			solver = new LouvainClusteringSolver(userSystem, scores, config);
 		} else {

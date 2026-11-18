@@ -1,0 +1,180 @@
+{
+  "useCases": [
+    {
+      "name": "createUser",
+      "nanoentitiesRead": [],
+      "nanoentitiesWritten": [
+        "User.userId",
+        "User.username",
+        "User.email",
+        "User.password",
+        "User.firstName",
+        "User.lastName"
+      ]
+    },
+    {
+      "name": "createProject",
+      "nanoentitiesRead": ["User.userId"],
+      "nanoentitiesWritten": [
+        "Project.projectId",
+        "Project.projectName",
+        "Project.description",
+        "Project.createdDate",
+        "Project.status"
+      ]
+    },
+    {
+      "name": "createTask",
+      "nanoentitiesRead": ["Project.projectId", "User.userId"],
+      "nanoentitiesWritten": [
+        "Task.taskId",
+        "Task.taskName",
+        "Task.taskDescription",
+        "Task.priority",
+        "Task.dueDate",
+        "Task.assignee"
+      ]
+    },
+    {
+      "name": "performAnalysis",
+      "nanoentitiesRead": [
+        "Project.projectName",
+        "Task.taskName",
+        "Task.taskDescription"
+      ],
+      "nanoentitiesWritten": [
+        "Analysis.analysisId",
+        "Analysis.analysisName",
+        "Analysis.analysisDate",
+        "Analysis.results",
+        "Analysis.status"
+      ]
+    },
+    {
+      "name": "assignTask",
+      "nanoentitiesRead": ["Task.taskId", "User.userId"],
+      "nanoentitiesWritten": ["Task.assignee"],
+      "isLatencyCritical": "true"
+    }
+  ],
+  "aggregates": [
+    {
+      "name": "UserAggregate",
+      "nanoentities": [
+        "User.userId",
+        "User.username",
+        "User.email",
+        "User.firstName",
+        "User.lastName"
+      ]
+    },
+    {
+      "name": "ProjectAggregate",
+      "nanoentities": [
+        "Project.projectId",
+        "Project.projectName",
+        "Project.description",
+        "Project.createdDate",
+        "Project.status"
+      ]
+    },
+    {
+      "name": "TaskAggregate",
+      "nanoentities": [
+        "Task.taskId",
+        "Task.taskName",
+        "Task.taskDescription",
+        "Task.priority",
+        "Task.dueDate",
+        "Task.assignee"
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "name": "User",
+      "nanoentities": [
+        "User.userId",
+        "User.username",
+        "User.email",
+        "User.password",
+        "User.firstName",
+        "User.lastName"
+      ]
+    },
+    {
+      "name": "Project",
+      "nanoentities": [
+        "Project.projectId",
+        "Project.projectName",
+        "Project.description",
+        "Project.createdDate",
+        "Project.status"
+      ]
+    },
+    {
+      "name": "Task",
+      "nanoentities": [
+        "Task.taskId",
+        "Task.taskName",
+        "Task.taskDescription",
+        "Task.priority",
+        "Task.dueDate",
+        "Task.assignee"
+      ]
+    },
+    {
+      "name": "Analysis",
+      "nanoentities": [
+        "Analysis.analysisId",
+        "Analysis.analysisName",
+        "Analysis.analysisDate",
+        "Analysis.results",
+        "Analysis.status"
+      ]
+    }
+  ],
+  "compatibilities": {
+    "availabilityCriticality": [
+      {
+        "characteristic": "Low",
+        "nanoentities": [
+          "Project.description",
+          "Task.taskDescription"
+        ]
+      },
+      {
+        "characteristic": "Critical",
+        "nanoentities": [
+          "User.userId",
+          "Project.projectId",
+          "Task.taskId",
+          "Analysis.analysisId"
+        ]
+      }
+    ]
+  },
+  "securityAccessGroups": [
+    {
+      "name": "adminAccess",
+      "nanoentities": [
+        "User.userId",
+        "User.username",
+        "User.email",
+        "Project.projectId",
+        "Project.projectName",
+        "Task.taskId"
+      ]
+    },
+    {
+      "name": "userAccess",
+      "nanoentities": [
+        "User.userId",
+        "User.firstName",
+        "User.lastName",
+        "Project.projectName",
+        "Task.taskName"
+      ]
+    }
+  ]
+}

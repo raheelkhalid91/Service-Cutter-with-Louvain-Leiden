@@ -25,7 +25,7 @@ import ch.hsr.servicecutter.model.usersystem.Nanoentity;
 import ch.hsr.servicecutter.model.usersystem.UserSystem;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 @IntegrationTest("server.port=0")
 @WebAppConfiguration
 public class EngineServiceRestTest {
@@ -66,7 +66,7 @@ public class EngineServiceRestTest {
 
 		this.restTemplate.delete(createURL(id));
 		ResponseEntity<?> notFoundResult = this.restTemplate.exchange(createURL(id), HttpMethod.GET, IntegrationTestHelper.createEmptyHttpRequest(), (Class<?>) null);
-		// TODO it would be more appropriate to receive a 404 here
+		// Expecting 500 until the endpoint returns a 404 for missing systems.
 		assertThat(notFoundResult.getStatusCode(), is(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 

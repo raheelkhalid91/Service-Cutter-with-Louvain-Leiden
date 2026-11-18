@@ -1,0 +1,87 @@
+{
+  "name": "Sales Manager System",
+  "entities": [
+    {
+      "name": "User",
+      "nanoentities": [
+        "id",
+        "username",
+        "password",
+        "email",
+        "enabled"
+      ]
+    },
+    {
+      "name": "Role",
+      "nanoentities": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "Customer",
+      "nanoentities": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "phone"
+      ]
+    },
+    {
+      "name": "Product",
+      "nanoentities": [
+        "id",
+        "name",
+        "description",
+        "price",
+        "stockQuantity"
+      ]
+    },
+    {
+      "name": "Order",
+      "nanoentities": [
+        "id",
+        "orderDate",
+        "status",
+        "totalAmount"
+      ]
+    },
+    {
+      "name": "OrderItem",
+      "nanoentities": [
+        "id",
+        "quantity",
+        "unitPrice",
+        "subtotal"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "type": "AGGREGATION",
+      "origin": "User",
+      "destination": "Role"
+    },
+    {
+      "type": "AGGREGATION",
+      "origin": "User",
+      "destination": "Customer"
+    },
+    {
+      "type": "AGGREGATION",
+      "origin": "Customer",
+      "destination": "Order"
+    },
+    {
+      "type": "COMPOSITION",
+      "origin": "Order",
+      "destination": "OrderItem"
+    },
+    {
+      "type": "AGGREGATION",
+      "origin": "OrderItem",
+      "destination": "Product"
+    }
+  ]
+}

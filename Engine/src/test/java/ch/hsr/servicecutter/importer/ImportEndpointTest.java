@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.common.collect.Lists;
 
-import ch.hsr.servicecutter.EngineServiceAppication;
+import ch.hsr.servicecutter.EngineServiceApplication;
 import ch.hsr.servicecutter.importer.api.Entity;
 import ch.hsr.servicecutter.importer.api.EntityRelation;
 import ch.hsr.servicecutter.importer.api.EntityRelation.RelationType;
@@ -28,7 +28,7 @@ import ch.hsr.servicecutter.model.usersystem.InstanceType;
 import ch.hsr.servicecutter.model.usersystem.Nanoentity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 public class ImportEndpointTest {
 
 	@Test

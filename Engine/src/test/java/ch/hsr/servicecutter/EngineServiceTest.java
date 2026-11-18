@@ -13,7 +13,7 @@ import ch.hsr.servicecutter.model.usersystem.UserSystem;
 import ch.hsr.servicecutter.rest.ResourceNotFoundException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineServiceAppication.class)
+@SpringApplicationConfiguration(classes = EngineServiceApplication.class)
 public class EngineServiceTest {
 
 	@Autowired

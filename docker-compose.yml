@@ -1,4 +1,3 @@
-version: "3"
 services:
   db:
     image: postgres:9.4
@@ -9,14 +8,18 @@ services:
       POSTGRES_PASSWORD: "N0A8KHWWHMjRBTrc8UjL"
 
   engine:
-    image: ghcr.io/servicecutter/engine
+    build: ./Engine
+    image: servicecutter/engine:local
     expose:
      - 8080
+    ports:
+     - "8090:8080"
     depends_on:
      - db
  
   editor:
-    image: ghcr.io/servicecutter/editor
+    build: ./Editor
+    image: servicecutter/editor:local
     ports:
      - "8080:8080"
     links:

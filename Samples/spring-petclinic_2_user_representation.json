@@ -1,0 +1,41 @@
+{
+  "aggregates": [],
+  "entities": [],
+  "useCases": [
+    {
+      "name": "RegisterOwner",
+      "nanoentitiesRead": [],
+      "nanoentitiesWritten": ["Owner.id", "Owner.firstName", "Owner.lastName", "Owner.address", "Owner.city", "Owner.telephone"]
+    },
+    {
+      "name": "UpdateOwner",
+      "nanoentitiesRead": ["Owner.id"],
+      "nanoentitiesWritten": ["Owner.firstName", "Owner.lastName", "Owner.address", "Owner.city", "Owner.telephone"]
+    },
+    {
+      "name": "AddPet",
+      "nanoentitiesRead": ["Owner.id", "PetType.id", "PetType.name"],
+      "nanoentitiesWritten": ["Pet.id", "Pet.name", "Pet.birthDate", "Pet.type", "Pet.ownerId"]
+    },
+    {
+      "name": "UpdatePet",
+      "nanoentitiesRead": ["Pet.id"],
+      "nanoentitiesWritten": ["Pet.name", "Pet.birthDate", "Pet.type"]
+    },
+    {
+      "name": "ScheduleVisit",
+      "nanoentitiesRead": ["Pet.id", "Vet.id"],
+      "nanoentitiesWritten": ["Visit.id", "Visit.visitDate", "Visit.description", "Visit.petId", "Visit.vetId"]
+    },
+    {
+      "name": "ViewPetDetails",
+      "nanoentitiesRead": ["Pet.id", "Pet.name", "Pet.birthDate", "Pet.type", "Visit.id", "Visit.visitDate", "Visit.description"],
+      "nanoentitiesWritten": []
+    },
+    {
+      "name": "ViewVets",
+      "nanoentitiesRead": ["Vet.id", "Vet.firstName", "Vet.lastName", "Vet.specialties", "Specialty.id", "Specialty.name"],
+      "nanoentitiesWritten": []
+    }
+  ]
+}

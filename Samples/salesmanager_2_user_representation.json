@@ -1,0 +1,80 @@
+{
+  "useCases": [
+    {
+      "name": "manageUserRoles",
+      "nanoentitiesRead": ["User.id", "User.username", "Role.id", "Role.name"],
+      "nanoentitiesWritten": [],
+      "isLatencyCritical": "false"
+    },
+    {
+      "name": "createOrder",
+      "nanoentitiesRead": ["Customer.id", "Customer.firstName", "Customer.lastName", "Product.id", "Product.price", "Product.stockQuantity"],
+      "nanoentitiesWritten": ["Order.id", "Order.orderDate", "Order.status", "Order.totalAmount", "OrderItem.id", "OrderItem.quantity", "OrderItem.unitPrice", "OrderItem.subtotal"],
+      "isLatencyCritical": "true"
+    },
+    {
+      "name": "viewOrderDetails",
+      "nanoentitiesRead": ["Order.id", "Order.orderDate", "Order.status", "Order.totalAmount", "OrderItem.quantity", "OrderItem.unitPrice", "Product.name", "Product.description"],
+      "nanoentitiesWritten": [],
+      "isLatencyCritical": "true"
+    },
+    {
+      "name": "updateProductInventory",
+      "nanoentitiesRead": ["Product.id", "Product.stockQuantity"],
+      "nanoentitiesWritten": ["Product.stockQuantity"],
+      "isLatencyCritical": "true"
+    },
+    {
+      "name": "manageCustomerData",
+      "nanoentitiesRead": ["Customer.id", "Customer.firstName", "Customer.lastName", "Customer.email", "Customer.phone"],
+      "nanoentitiesWritten": ["Customer.firstName", "Customer.lastName", "Customer.email", "Customer.phone"],
+      "isLatencyCritical": "false"
+    }
+  ],
+  "aggregates": [
+    {
+      "name": "OrderAggregate",
+      "nanoentities": ["Order.id", "Order.orderDate", "Order.status", "Order.totalAmount", "OrderItem.id", "OrderItem.quantity", "OrderItem.unitPrice", "OrderItem.subtotal"]
+    },
+    {
+      "name": "UserAggregate",
+      "nanoentities": ["User.id", "User.username", "User.password", "User.email", "User.enabled", "Role.id", "Role.name"]
+    }
+  ],
+  "compatibilities": {
+    "availabilityCriticality": [
+      {
+        "characteristic": "Critical",
+        "nanoentities": ["Order.id", "Product.stockQuantity", "OrderItem.quantity", "OrderItem.subtotal"]
+      },
+      {
+        "characteristic": "Low",
+        "nanoentities": ["Product.description", "Customer.phone"]
+      }
+    ],
+    "securityCriticality": [
+      {
+        "characteristic": "Critical",
+        "nanoentities": ["User.password", "User.id", "User.username", "User.email"]
+      },
+      {
+        "characteristic": "Public",
+        "nanoentities": ["Product.name", "Product.price", "Customer.firstName", "Customer.lastName"]
+      }
+    ]
+  },
+  "securityAccessGroups": [
+    {
+      "name": "adminAccess",
+      "nanoentities": ["User.id", "User.username", "User.password", "User.email", "User.enabled", "Role.id", "Role.name", "Customer.id", "Product.id", "Product.stockQuantity"]
+    },
+    {
+      "name": "salesAccess",
+      "nanoentities": ["Customer.id", "Customer.firstName", "Customer.lastName", "Customer.email", "Order.id", "Order.orderDate", "Order.status", "OrderItem.quantity", "Product.id", "Product.name", "Product.price"]
+    },
+    {
+      "name": "customerAccess",
+      "nanoentities": ["Customer.email", "Order.id", "Order.orderDate", "Order.status", "Order.totalAmount", "Product.name", "Product.description", "Product.price"]
+    }
+  ]
+}

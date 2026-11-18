@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import ch.hsr.servicecutter.model.solver.EntityPair;
 import ch.hsr.servicecutter.model.usersystem.Nanoentity;
-import ch.hsr.servicecutter.scorer.criterionScorer.SemanticProximityCriterionScorer;
 
 public class SemanticProximityCriterionScorerTest {
 
@@ -33,7 +32,7 @@ public class SemanticProximityCriterionScorerTest {
 		SemanticProximityCriterionScorer sut = new SemanticProximityCriterionScorer();
 		Map<EntityPair, Double> input = new HashMap<>();
 
-		Random rand = new Random();
+		Random rand = new Random(12345);
 		for (int i = 0; i < numberOfEdges; i++) {
 			input.put(new EntityPair(createNanoentity("A"), createNanoentity(i + "")), (double) rand.nextInt(100));
 		}

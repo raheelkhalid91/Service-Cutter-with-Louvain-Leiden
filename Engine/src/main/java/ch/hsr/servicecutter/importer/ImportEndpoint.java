@@ -143,7 +143,8 @@ public class ImportEndpoint {
 
 		// Aggregations
 		CouplingCriterion semanticProximity = couplingCriterionRepository.readByName(CouplingCriterion.SEMANTIC_PROXIMITY);
-		for (EntityRelation relation : erd.getRelations()) {
+		List<EntityRelation> relations = erd.getRelations() != null ? erd.getRelations() : new ArrayList<>();
+		for (EntityRelation relation : relations) {
 			if (RelationType.AGGREGATION.equals(relation.getType())) {
 				CouplingInstance instance = new CouplingInstance(semanticProximity, InstanceType.AGGREGATION);
 				couplingInstanceRepository.save(instance);
@@ -165,7 +166,7 @@ public class ImportEndpoint {
 	}
 
 	private List<TemporaryNanoentity> expandEntitiesByCompositionAndInheritance(final EntityRelationDiagram erd, List<TemporaryNanoentity> nanoentities) {
-		List<EntityRelation> currentRelations = new ArrayList<>(erd.getRelations());
+		List<EntityRelation> currentRelations = new ArrayList<>(erd.getRelations() != null ? erd.getRelations() : new ArrayList<>());
 
 		// does this work with cycles?
 		List<EntityRelation> relationsToEdgeEntities = getRelationsToEdgeEntities(currentRelations, erd.getEntities());

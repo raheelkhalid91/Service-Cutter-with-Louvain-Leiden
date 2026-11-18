@@ -18,6 +18,7 @@ import org.springframework.util.Assert;
 
 import ch.hsr.servicecutter.model.analyzer.ServiceRelation;
 import ch.hsr.servicecutter.model.analyzer.ServiceRelation.Direction;
+import ch.hsr.servicecutter.model.analyzer.ServiceMetrics;
 import ch.hsr.servicecutter.model.criteria.CouplingCriterion;
 import ch.hsr.servicecutter.model.repository.NanoentityRepository;
 import ch.hsr.servicecutter.model.solver.EntityPair;
@@ -79,6 +80,9 @@ public class ServiceCutAnalyzer {
 			}
 		}
 		solverResult.setRelations(relations);
+		
+		// Calculate coupling and cohesion metrics for each service
+		calculateMetrics(solverResult.getServices(), scores, userSystem);
 
 	}
 
@@ -168,6 +172,126 @@ public class ServiceCutAnalyzer {
 			}
 		}
 		return score;
+	}
+	
+	/**
+	 * Calculate coupling and cohesion metrics for each service
+	 */
+	private void calculateMetrics(final Set<Service> services, final Map<EntityPair, Map<String, Score>> scores, final UserSystem userSystem) {
+		List<Service> serviceList = new ArrayList<>(services);
+		
+		for (Service service : serviceList) {
+			int internalEdges = countInternalEdges(service, scores, userSystem);
+			int externalEdges = 0;
+			int dependencies = 0;
+			
+			for (Service otherService : serviceList) {
+				if (!service.equals(otherService)) {
+					int edgesToOther = countEdgesBetweenServices(service, otherService, scores, userSystem);
+					if (edgesToOther > 0) {
+						externalEdges += edgesToOther;
+						dependencies++;
+					}
+				}
+			}
+			
+			double cohesion = calculateCohesion(service.getNanoentities().size(), internalEdges);
+			double coupling = calculateCoupling(internalEdges, externalEdges);
+			
+			ServiceMetrics metrics = new ServiceMetrics(
+				cohesion,
+				coupling,
+				service.getNanoentities().size(),
+				dependencies
+			);
+			service.setMetrics(metrics);
+			
+			log.info("Calculated metrics for {}: cohesion={}, coupling={}, size={}, dependencies={}, internalEdges={}, externalEdges={}",
+				service.getName(), 
+				String.format("%.2f", cohesion),
+				String.format("%.2f", coupling),
+				service.getNanoentities().size(),
+				dependencies,
+				internalEdges,
+				externalEdges);
+		}
+	}
+	
+	private double calculateCohesion(final int nanoentityCount, final int internalEdges) {
+		if (nanoentityCount <= 1) {
+			return 1.0;
+		}
+		
+		double maxEdges = (nanoentityCount * (nanoentityCount - 1)) / 2.0;
+		return maxEdges > 0 ? internalEdges / maxEdges : 0.0;
+	}
+	
+	private double calculateCoupling(final int internalEdges, final int externalEdges) {
+		int totalEdges = internalEdges + externalEdges;
+		return totalEdges > 0 ? (double) externalEdges / totalEdges : 0.0;
+	}
+	
+	private int countInternalEdges(final Service service, final Map<EntityPair, Map<String, Score>> scores, final UserSystem userSystem) {
+		List<String> nanoentities = service.getNanoentities();
+		int internalEdges = 0;
+		
+		for (int i = 0; i < nanoentities.size(); i++) {
+			for (int j = i + 1; j < nanoentities.size(); j++) {
+				String nanoentityA = nanoentities.get(i);
+				String nanoentityB = nanoentities.get(j);
+				if (hasEdgeBetweenNanoentities(nanoentityA, nanoentityB, scores, userSystem)) {
+					internalEdges++;
+				}
+			}
+		}
+		
+		return internalEdges;
+	}
+	
+	private int countEdgesBetweenServices(final Service serviceA, final Service serviceB, 
+			final Map<EntityPair, Map<String, Score>> scores, final UserSystem userSystem) {
+		int edges = 0;
+		
+		for (String nanoentityA : serviceA.getNanoentities()) {
+			for (String nanoentityB : serviceB.getNanoentities()) {
+				if (hasEdgeBetweenNanoentities(nanoentityA, nanoentityB, scores, userSystem)) {
+					edges++;
+				}
+			}
+		}
+		
+		return edges;
+	}
+	
+	/**
+	 * Get the total score between two nanoentities across all coupling criteria
+	 */
+	private double getScoreBetweenNanoentities(final String nanoentityA, final String nanoentityB, 
+			final Map<EntityPair, Map<String, Score>> scores, final UserSystem userSystem) {
+		EntityPair pair = new EntityPair(
+			findNanoentity(nanoentityA, userSystem), 
+			findNanoentity(nanoentityB, userSystem)
+		);
+		
+		final Map<String, Score> scoresByPair = scores.get(pair);
+		if (scoresByPair == null) {
+			return 0.0;
+		}
+		
+		// Sum all prioritized scores across all coupling criteria
+		double totalScore = 0.0;
+		for (Score score : scoresByPair.values()) {
+			if (score != null) {
+				totalScore += score.getPrioritizedScore();
+			}
+		}
+		
+		return totalScore;
+	}
+	
+	private boolean hasEdgeBetweenNanoentities(final String nanoentityA, final String nanoentityB, 
+			final Map<EntityPair, Map<String, Score>> scores, final UserSystem userSystem) {
+		return getScoreBetweenNanoentities(nanoentityA, nanoentityB, scores, userSystem) > 0.0;
 	}
 
 }

@@ -11,11 +11,11 @@ import ch.hsr.servicecutter.importer.ImportEndpoint;
 import ch.hsr.servicecutter.solver.SolverEndpoint;
 
 @SpringBootApplication
-public class EngineServiceAppication extends SpringBootServletInitializer {
+public class EngineServiceApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
-		return application.sources(EngineServiceAppication.class);
+		return application.sources(EngineServiceApplication.class);
 	}
 
 	@Bean
@@ -24,6 +24,6 @@ public class EngineServiceAppication extends SpringBootServletInitializer {
 	}
 
 	public static void main(final String[] args) {
-		new EngineServiceAppication().configure(new SpringApplicationBuilder(EngineServiceAppication.class)).run(args);
+		new EngineServiceApplication().configure(new SpringApplicationBuilder(EngineServiceApplication.class)).run(args);
 	}
 }

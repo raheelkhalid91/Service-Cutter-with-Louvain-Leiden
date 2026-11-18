@@ -16,8 +16,6 @@ import org.springframework.http.MediaType;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ch.hsr.servicecutter.ObjectMapperContextResolver;
-
 public class IntegrationTestHelper {
 
 	public static <T> HttpEntity<T> createHttpRequestWithPostObj(final T obj) {

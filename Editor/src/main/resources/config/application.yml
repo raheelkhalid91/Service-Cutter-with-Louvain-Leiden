@@ -10,7 +10,7 @@ jhipster.security.rememberme.key: 4af236f585750c12ea6878ba281cedb21d7ad1ec
 
 application.links.engine:
     host: localhost
-    port: 8090
+    port: 8080
 
 async:
     corePoolSize: 2

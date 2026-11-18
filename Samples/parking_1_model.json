@@ -1,0 +1,47 @@
+{
+  "name": "Parking Management System",
+  "entities": [
+    {
+      "name": "User",
+      "nanoentities": ["id", "username", "password"]
+    },
+    {
+      "name": "Role",
+      "nanoentities": ["id", "name"]
+    },
+    {
+      "name": "Vehicle",
+      "nanoentities": ["id", "plateNumber", "type"]
+    },
+    {
+      "name": "ParkingArea",
+      "nanoentities": ["id", "name", "capacity"]
+    },
+    {
+      "name": "Parking",
+      "nanoentities": ["id", "checkInTime", "checkOutTime"]
+    }
+  ],
+  "relations": [
+    {
+      "type": "AGGREGATION",
+      "origin": "User",
+      "destination": "Vehicle"
+    },
+    {
+      "type": "AGGREGATION",
+      "origin": "User",
+      "destination": "Role"
+    },
+    {
+      "type": "AGGREGATION",
+      "origin": "Parking",
+      "destination": "Vehicle"
+    },
+    {
+      "type": "AGGREGATION",
+      "origin": "Parking",
+      "destination": "ParkingArea"
+    }
+  ]
+}

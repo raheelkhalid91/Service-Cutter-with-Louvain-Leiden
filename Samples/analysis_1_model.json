@@ -1,0 +1,69 @@
+{
+  "name": "Analysis System",
+  "entities": [
+    {
+      "name": "User",
+      "nanoentities": [
+        "userId",
+        "username",
+        "email",
+        "password",
+        "firstName",
+        "lastName"
+      ]
+    },
+    {
+      "name": "Project",
+      "nanoentities": [
+        "projectId",
+        "projectName",
+        "description",
+        "createdDate",
+        "status"
+      ]
+    },
+    {
+      "name": "Task",
+      "nanoentities": [
+        "taskId",
+        "taskName",
+        "taskDescription",
+        "priority",
+        "dueDate",
+        "assignee"
+      ]
+    },
+    {
+      "name": "Analysis",
+      "nanoentities": [
+        "analysisId",
+        "analysisName",
+        "analysisDate",
+        "results",
+        "status"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "origin": "Project",
+      "destination": "User",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Project",
+      "destination": "Task",
+      "type": "COMPOSITION"
+    },
+    {
+      "origin": "Task",
+      "destination": "User",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Analysis",
+      "destination": "Project",
+      "type": "AGGREGATION"
+    }
+  ]
+}

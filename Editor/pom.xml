@@ -522,10 +522,6 @@
                     <processors>
                         <processor>org.mapstruct.ap.MappingProcessor</processor>
                     </processors>
-                    <options>
-                        <mapstruct.suppressGeneratorTimestamp>true</mapstruct.suppressGeneratorTimestamp>
-                        <mapstruct.defaultComponentModel>spring</mapstruct.defaultComponentModel>
-                    </options>
                 </configuration>
                 <executions>
                     <execution>
@@ -676,6 +672,7 @@
                                     <skipTests>true</skipTests>
                                     <buildTool>grunt</buildTool>
                                     <buildArgs>sass:server --force</buildArgs>
+                                    <skip>true</skip>
                                 </configuration>
                             </execution>
                         </executions>
@@ -734,8 +731,10 @@
                                     <goal>build</goal>
                                 </goals>
                                 <configuration>
+                                            <skipTests>true</skipTests>
                                     <buildTool>grunt</buildTool>
                                     <buildArgs>build --force --no-color</buildArgs>
+                                    <skip>true</skip>
                                 </configuration>
                             </execution>
                         </executions>
@@ -748,9 +747,6 @@
                         <version>2.5</version>
                         <configuration>
                             <filesets>
-                                <fileset>
-                                    <directory>src/main/webapp/dist</directory>
-                                </fileset>
                                 <fileset>
                                     <directory>.tmp</directory>
                                 </fileset>

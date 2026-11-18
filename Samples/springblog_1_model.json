@@ -1,0 +1,74 @@
+{
+  "name": "SpringBlog",
+  "entities": [
+    {
+      "name": "User",
+      "nanoentities": [
+        "id",
+        "username",
+        "email",
+        "password",
+        "role",
+        "status"
+      ]
+    },
+    {
+      "name": "Post",
+      "nanoentities": [
+        "id",
+        "title",
+        "content",
+        "createdAt",
+        "updatedAt",
+        "status",
+        "authorId"
+      ]
+    },
+    {
+      "name": "Tag",
+      "nanoentities": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "Comment",
+      "nanoentities": [
+        "id",
+        "content",
+        "createdAt",
+        "author",
+        "postId"
+      ]
+    },
+    {
+      "name": "Admin",
+      "nanoentities": [
+        "userId",
+        "permissions"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "origin": "User",
+      "destination": "Post",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Post",
+      "destination": "Tag",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "Post",
+      "destination": "Comment",
+      "type": "AGGREGATION"
+    },
+    {
+      "origin": "User",
+      "destination": "Admin",
+      "type": "AGGREGATION"
+    }
+  ]
+}
