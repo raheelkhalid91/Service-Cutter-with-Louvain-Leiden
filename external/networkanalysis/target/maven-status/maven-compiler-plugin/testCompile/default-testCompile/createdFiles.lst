@@ -1,0 +1,6 @@
+nl\cwts\networkanalysis\TestNetworkLayout.class
+nl\cwts\util\LargeIntArrayTest.class
+nl\cwts\networkanalysis\TestNetworkClustering.class
+nl\cwts\util\LargeBooleanArrayTest.class
+nl\cwts\util\LargeDoubleArrayTest.class
+nl\cwts\util\LargeLongArrayTest.class

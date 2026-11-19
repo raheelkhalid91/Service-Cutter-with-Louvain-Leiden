@@ -1,0 +1,15 @@
+*.class
+*.swp
+*.swo
+build/
+build.xml
+nbbuild.xml
+manifest.mf
+nbproject/
+/bin/
+/dist/
+/test/
+.classpath
+.project
+.settings/
+.gradle/
